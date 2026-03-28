@@ -14,7 +14,8 @@
 #include "endpoint_status.h"
 #include "battery_status.h"
 #include "home_buttons.h"
-
+#include "prospector_status.h"
+#include <stdio.h>
 /* ── RTC device ────────────────────────────────────────────────────────── */
 
 static const struct device *s_rtc = DEVICE_DT_GET(DT_ALIAS(rtc));
