@@ -6,7 +6,7 @@
  * Extracted from home_status.c so battery and endpoint concerns are
  * in separate compilation units.
  */
-
+#if 0
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -88,3 +88,4 @@ void battery_status_init(lv_obj_t **arcs, lv_obj_t **lbls)
 
 	periph_battery_init();
 }
+#endif
