@@ -148,8 +148,8 @@ static void update_datetime(lv_timer_t *t)
 static lv_obj_t *home_screen;
 static lv_obj_t *label;
 
-void page_home_create(void) {
-    home_screen = lv_obj_create(NULL);
+void page_home_create(lv_obj_t *tile) {
+    home_screen = lv_obj_create(tile);
     lv_obj_set_size(home_screen, LV_PCT(100), LV_PCT(100));
 
     label = lv_label_create(home_screen);
