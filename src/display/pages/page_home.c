@@ -146,7 +146,8 @@ static void update_datetime(lv_timer_t *t)
 // 	return 0;
 // }
 static lv_obj_t *home_screen;
-static lv_obj_t *label;
+static lv_obj_t *status_label;
+static lv_obj_t *layer_label;
 
 void page_home_create(lv_obj_t *tile) {
     home_screen = lv_obj_create(tile);
