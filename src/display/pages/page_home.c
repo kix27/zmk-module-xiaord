@@ -151,10 +151,22 @@ static lv_obj_t *label;
 void page_home_create(lv_obj_t *tile) {
     home_screen = lv_obj_create(tile);
     lv_obj_set_size(home_screen, LV_PCT(100), LV_PCT(100));
+    lv_obj_set_style_bg_color(home_screen, lv_color_black(), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(home_screen, LV_OPA_COVER, LV_PART_MAIN);
 
-    label = lv_label_create(home_screen);
-    lv_label_set_text(label, "SCANNER RUNNING");
-    lv_obj_center(label);
+    status_label = lv_label_create(home_screen);
+    lv_label_set_text(status_label, "WAITING FOR MONA2");
+    lv_obj_set_style_text_color(status_label, lv_color_white(), LV_PART_MAIN);
+    lv_obj_set_style_text_font(status_label, &lv_font_montserrat_20, LV_PART_MAIN);
+    lv_obj_align(status_label, LV_ALIGN_CENTER, 0, -20);
+
+    layer_label = lv_label_create(home_screen);
+    lv_label_set_text(layer_label, "LAYER: ---");
+    lv_obj_set_style_text_color(layer_label, lv_color_white(), LV_PART_MAIN);
+    lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_20, LV_PART_MAIN);
+    lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 20);
+
+    lv_scr_load(home_screen);
 }
 /* ── Page lifecycle ────────────────────────────────────────────────────── */
 
