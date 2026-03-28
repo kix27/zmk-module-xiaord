@@ -16,6 +16,7 @@
 #include "home_buttons.h"
 #include "prospector_status.h"
 #include <stdio.h>
+#include <zmk/status_scanner.h>
 /* ── RTC device ────────────────────────────────────────────────────────── */
 
 static const struct device *s_rtc = DEVICE_DT_GET(DT_ALIAS(rtc));
@@ -29,6 +30,7 @@ static lv_obj_t   *s_output_lbl;
 static lv_obj_t *home_screen;
 static lv_obj_t *status_label;
 static lv_obj_t *layer_label;
+static bool scanner_started = false;
 /* ── Endpoint status callback ──────────────────────────────────────────── */
 
 static void home_endpoint_cb(struct endpoint_state state)
@@ -189,9 +191,14 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
     lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 20);
 
-	update_home_labels();
-	lv_scr_load(home_screen);
-	lv_timer_create(home_timer_cb, 500, NULL);
+    update_home_labels();
+    lv_timer_create(home_timer_cb, 500, NULL);
+    lv_scr_load(home_screen);
+
+    if (!scanner_started) {
+        zmk_status_scanner_start();
+        scanner_started = true;
+    }
 }
 /* ── Page lifecycle ────────────────────────────────────────────────────── */
 
