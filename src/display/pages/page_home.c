@@ -26,7 +26,9 @@ static lv_obj_t   *s_date_lbl;
 static lv_obj_t   *s_time_lbl;
 static lv_timer_t *s_timer;
 static lv_obj_t   *s_output_lbl;
-
+static lv_obj_t *home_screen;
+static lv_obj_t *status_label;
+static lv_obj_t *layer_label;
 /* ── Endpoint status callback ──────────────────────────────────────────── */
 
 static void home_endpoint_cb(struct endpoint_state state)
@@ -167,9 +169,7 @@ static void home_timer_cb(lv_timer_t *timer) {
 // 
 // 	return 0;
 // }
-static lv_obj_t *home_screen;
-static lv_obj_t *status_label;
-static lv_obj_t *layer_label;
+
 
 void page_home_create(lv_obj_t *tile) {
     home_screen = lv_obj_create(tile);
