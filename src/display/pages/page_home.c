@@ -67,7 +67,28 @@ static void update_datetime(lv_timer_t *t)
 	lv_label_set_text_fmt(s_time_lbl, "%02d:%02d",
 			      time.tm_hour, time.tm_min);
 }
+static void update_home_labels(void) {
+    static char status_buf[64];
+    static char layer_buf[32];
 
+    if (prospector_status_has_data()) {
+        snprintf(status_buf, sizeof(status_buf), "%s  %d%%",
+                 prospector_status_get_keyboard_name(),
+                 prospector_status_get_battery());
+        snprintf(layer_buf, sizeof(layer_buf), "LAYER: %s",
+                 prospector_status_get_layer_name());
+    } else {
+        snprintf(status_buf, sizeof(status_buf), "WAITING FOR MONA2");
+        snprintf(layer_buf, sizeof(layer_buf), "LAYER: ---");
+    }
+
+    lv_label_set_text(status_label, status_buf);
+    lv_label_set_text(layer_label, layer_buf);
+}
+static void home_timer_cb(lv_timer_t *timer) {
+    ARG_UNUSED(timer);
+    update_home_labels();
+}
 /* ── Page create ───────────────────────────────────────────────────────── */
 // static int page_home_create(lv_obj_t *tile)
 // {
@@ -168,7 +189,9 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
     lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 20);
 
-    lv_scr_load(home_screen);
+	update_home_labels();
+	lv_scr_load(home_screen);
+	lv_timer_create(home_timer_cb, 500, NULL);
 }
 /* ── Page lifecycle ────────────────────────────────────────────────────── */
 
@@ -193,3 +216,4 @@ const struct page_ops page_home_ops = {
 	.on_enter     = page_home_enter,
 	.on_leave     = page_home_leave,
 };
+
