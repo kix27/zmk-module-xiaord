@@ -13,7 +13,7 @@
  *     Row 1   : [USB] [-33,15]  [TRASH] [+33,15]
  *     Row 2   : [⌂] [0,58]
  */
-
+#if 0
 #include <lvgl.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
@@ -197,3 +197,4 @@ const struct page_ops page_bt_ops = {
 	.on_enter = NULL,
 	.on_leave = NULL,
 };
+#endif
