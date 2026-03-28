@@ -3,3 +3,4 @@
 zephyr_library_sources(page_home.c)
 zephyr_library_sources(page_bt.c)
 zephyr_library_sources(page_clock.c)
+zephyr_library_sources(page_bt_stub.c)
