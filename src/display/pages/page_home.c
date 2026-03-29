@@ -212,11 +212,11 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_center(bg_img);
     lv_obj_set_style_image_opa(bg_img, LV_OPA_70, 0);
 
-    lv_obj_t *overlay = lv_obj_create(home_screen);
-    lv_obj_set_size(overlay, LV_PCT(100), LV_PCT(100));
-    lv_obj_set_style_bg_color(overlay, lv_color_black(), LV_PART_MAIN);
-    lv_obj_set_style_bg_opa(overlay, LV_OPA_30, LV_PART_MAIN);
-    lv_obj_clear_flag(overlay, LV_OBJ_FLAG_SCROLLABLE);
+    //lv_obj_t *overlay = lv_obj_create(home_screen);
+    //lv_obj_set_size(overlay, LV_PCT(100), LV_PCT(100));
+    //lv_obj_set_style_bg_color(overlay, lv_color_black(), LV_PART_MAIN);
+    //lv_obj_set_style_bg_opa(overlay, LV_OPA_30, LV_PART_MAIN);
+    //lv_obj_clear_flag(overlay, LV_OBJ_FLAG_SCROLLABLE);
 	
     status_label = lv_label_create(home_screen);
     lv_label_set_text(status_label, "WAITING FOR MONA2");
