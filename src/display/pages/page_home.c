@@ -82,10 +82,8 @@ static void update_home_labels(void) {
     if (prospector_status_has_data()) {
         snprintf(status_buf, sizeof(status_buf), "%s  %d%%",prospector_status_get_keyboard_name(),prospector_status_get_battery());
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: %s",prospector_status_get_layer_name());
-		snprintf(left_battery_buf, sizeof(left_battery_buf), "L: %d%%",prospector_status_get_peripheral_battery(0));
-		snprintf(right_battery_buf, sizeof(right_battery_buf), "1:%d%% 2:%d%%",
-         prospector_status_get_peripheral_battery(1),
-         prospector_status_get_peripheral_battery(2));
+		snprintf(left_battery_buf, sizeof(left_battery_buf), "LEFT: %d%%",prospector_status_get_peripheral_battery(0));
+		snprintf(right_battery_buf, sizeof(right_battery_buf), "RIGHT: %d%%",prospector_status_get_battery());
     } else {
         snprintf(status_buf, sizeof(status_buf), "WAITING FOR MONA2");
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: ---");
