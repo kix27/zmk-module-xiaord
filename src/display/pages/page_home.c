@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <zmk/status_scanner.h>
 LV_IMAGE_DECLARE(wave_bg);
+
 /* ── RTC device ────────────────────────────────────────────────────────── */
 
 static const struct device *s_rtc = DEVICE_DT_GET(DT_ALIAS(rtc));
@@ -206,9 +207,16 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_bg_color(home_screen, lv_color_black(), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(home_screen, LV_OPA_COVER, LV_PART_MAIN);
 
-	bg_img = lv_image_create(home_screen);
-	lv_image_set_src(bg_img, &wave_bg);
-	lv_obj_center(bg_img);
+    bg_img = lv_image_create(home_screen);
+    lv_image_set_src(bg_img, &wave_bg);
+    lv_obj_center(bg_img);
+    lv_obj_set_style_image_opa(bg_img, LV_OPA_70, 0);
+
+    lv_obj_t *overlay = lv_obj_create(home_screen);
+    lv_obj_set_size(overlay, LV_PCT(100), LV_PCT(100));
+    lv_obj_set_style_bg_color(overlay, lv_color_black(), LV_PART_MAIN);
+    lv_obj_set_style_bg_opa(overlay, LV_OPA_30, LV_PART_MAIN);
+    lv_obj_clear_flag(overlay, LV_OBJ_FLAG_SCROLLABLE);
 	
     status_label = lv_label_create(home_screen);
     lv_label_set_text(status_label, "WAITING FOR MONA2");
