@@ -220,7 +220,7 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(left_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(left_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(left_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -70, 65);
+	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -40, 65);
 	
 	right_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(right_battery_arc, 56, 56);
@@ -235,7 +235,7 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(right_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(right_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(right_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 70, 65);
+	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 65);
 	
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
