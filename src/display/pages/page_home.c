@@ -206,8 +206,8 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
 	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 60, 50);
 
-	lv_label_set_text(left_battery_label, left_battery_buf);
-	lv_label_set_text(right_battery_label, right_battery_buf);
+	lv_label_set_text(left_battery_label, "L: ---");
+	lv_label_set_text(right_battery_label, "R: ---");
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
