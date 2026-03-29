@@ -35,6 +35,7 @@ static lv_obj_t *left_battery_label;
 static lv_obj_t *right_battery_label;
 static lv_obj_t *left_battery_arc;
 static lv_obj_t *right_battery_arc;
+static lv_obj_t *layer_num_labels[10];
 /* ── Endpoint status callback ──────────────────────────────────────────── */
 
 static void home_endpoint_cb(struct endpoint_state state)
@@ -104,6 +105,14 @@ static void update_home_labels(void) {
 	    lv_arc_set_value(left_battery_arc, 0);
 	    lv_arc_set_value(right_battery_arc, 0);
 	}
+
+	for (int i = 0; i < 10; i++) {
+        if (prospector_status_has_data() && i == prospector_status_get_active_layer()) {
+            lv_obj_set_style_text_color(layer_num_labels[i], lv_color_white(), LV_PART_MAIN);
+        } else {
+            lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
+        }
+    }
 }
 static void home_timer_cb(lv_timer_t *timer) {
     ARG_UNUSED(timer);
@@ -199,13 +208,18 @@ void page_home_create(lv_obj_t *tile) {
     lv_label_set_text(status_label, "WAITING FOR MONA2");
     lv_obj_set_style_text_color(status_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(status_label, &lv_font_montserrat_16, LV_PART_MAIN);
-    lv_obj_align(status_label, LV_ALIGN_CENTER, 0, -20);
+    lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 10);
 
+    layer_num_labels[i] = lv_label_create(home_screen);
+    lv_label_set_text(layer_num_labels[i], buf);
+    lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
+    lv_obj_align(layer_num_labels[i], LV_ALIGN_TOP_MID, -90 + (i * 20), 38);
+	}
     layer_label = lv_label_create(home_screen);
     lv_label_set_text(layer_label, "LAYER: ---");
     lv_obj_set_style_text_color(layer_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
-    lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 20);
+    lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 66);
 
 	left_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(left_battery_arc, 56, 56);
@@ -220,7 +234,7 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(left_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(left_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(left_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -40, 65);
+	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -40, 108);
 	
 	right_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(right_battery_arc, 56, 56);
@@ -235,17 +249,21 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(right_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(right_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(right_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 65);
+	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 108);
+
+	for (int i = 0; i < 10; i++) {
+    char buf[4];
+    snprintf(buf, sizeof(buf), "%d", i);
 	
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -40, 65);
+	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -40, 108);
 	
 	right_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(right_battery_label, "R: ---");
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 40, 65);
+	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 40, 108);
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
@@ -260,14 +278,14 @@ void page_home_create(lv_obj_t *tile) {
 
 static void page_home_enter(void)
 {
-	update_datetime(NULL); /* show current time immediately on entry */
-	lv_timer_resume(s_timer);
+	//update_datetime(NULL); /* show current time immediately on entry */
+	//lv_timer_resume(s_timer);
 	home_buttons_set_visible(false);
 }
 
 static void page_home_leave(void)
 {
-	lv_timer_pause(s_timer);
+	//lv_timer_pause(s_timer);
 	home_buttons_pause();
 }
 
