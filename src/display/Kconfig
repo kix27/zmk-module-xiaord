@@ -12,4 +12,7 @@ config XIAORD_BG_2
 config XIAORD_BG_3
     bool "Background 3"
 
+config XIAORD_BG_4
+    bool "Background 4"
+
 endchoice
