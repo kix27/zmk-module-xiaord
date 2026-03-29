@@ -17,6 +17,7 @@
 #include "prospector_status.h"
 #include <stdio.h>
 #include <zmk/status_scanner.h>
+LV_IMAGE_DECLARE(wave_bg);
 /* ── RTC device ────────────────────────────────────────────────────────── */
 
 static const struct device *s_rtc = DEVICE_DT_GET(DT_ALIAS(rtc));
@@ -36,6 +37,7 @@ static lv_obj_t *right_battery_label;
 static lv_obj_t *left_battery_arc;
 static lv_obj_t *right_battery_arc;
 static lv_obj_t *layer_num_labels[10];
+static lv_obj_t *bg_img;
 /* ── Endpoint status callback ──────────────────────────────────────────── */
 
 static void home_endpoint_cb(struct endpoint_state state)
@@ -204,6 +206,10 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_bg_color(home_screen, lv_color_black(), LV_PART_MAIN);
     lv_obj_set_style_bg_opa(home_screen, LV_OPA_COVER, LV_PART_MAIN);
 
+	bg_img = lv_image_create(home_screen);
+	lv_image_set_src(bg_img, &wave_bg);
+	lv_obj_center(bg_img);
+	
     status_label = lv_label_create(home_screen);
     lv_label_set_text(status_label, "WAITING FOR MONA2");
     lv_obj_set_style_text_color(status_label, lv_color_white(), LV_PART_MAIN);
