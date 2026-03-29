@@ -84,8 +84,8 @@ static void update_home_labels(void) {
     if (prospector_status_has_data()) {
         snprintf(status_buf, sizeof(status_buf), "%s  %d%%",prospector_status_get_keyboard_name(),prospector_status_get_battery());
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: %s",prospector_status_get_layer_name());
-		snprintf(left_battery_buf, sizeof(left_battery_buf), "LEFT: %d%%",prospector_status_get_peripheral_battery(0));
-		snprintf(right_battery_buf, sizeof(right_battery_buf), "RIGHT: %d%%",prospector_status_get_battery());
+		snprintf(left_battery_buf, sizeof(left_battery_buf), "L: %d%%",prospector_status_get_peripheral_battery(0));
+		snprintf(right_battery_buf, sizeof(right_battery_buf), "R: %d%%",prospector_status_get_battery());
     } else {
         snprintf(status_buf, sizeof(status_buf), "WAITING FOR MONA2");
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: ---");
@@ -240,12 +240,12 @@ void page_home_create(lv_obj_t *tile) {
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -70, 65);
+	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -60, 65);
 	
 	right_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(right_battery_label, "R: ---");
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 70, 65);
+	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 60, 65);
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
