@@ -79,13 +79,27 @@ static void update_datetime(lv_timer_t *t)
 	lv_label_set_text_fmt(s_time_lbl, "%02d:%02d",
 			      time.tm_hour, time.tm_min);
 }
+static lv_color_t battery_color(uint8_t percent) {
+    if (percent >= 40) {
+        return lv_color_hex(0x00C853);  // 緑
+    } else if (percent >= 20) {
+        return lv_color_hex(0xFF9800);  // オレンジ
+    } else {
+        return lv_color_hex(0xF44336);  // 赤
+    }
+}
 static void update_home_labels(void) {
     static char status_buf[64];
     static char layer_buf[32];
 	static char left_battery_buf[16];
 	static char right_battery_buf[16];	
 
+	uint8_t left_bat = 0;
+    uint8_t right_bat = 0;
+
     if (prospector_status_has_data()) {
+		left_bat = prospector_status_get_peripheral_battery(0);
+        right_bat = prospector_status_get_battery();
         snprintf(status_buf, sizeof(status_buf), "DEVICE: %s",prospector_status_get_keyboard_name());
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: %s",prospector_status_get_layer_name());
 		snprintf(left_battery_buf, sizeof(left_battery_buf), "L: %d%%",prospector_status_get_peripheral_battery(0));
@@ -104,9 +118,13 @@ static void update_home_labels(void) {
 	if (prospector_status_has_data()) {
 	    lv_arc_set_value(left_battery_arc, prospector_status_get_peripheral_battery(0));
 	    lv_arc_set_value(right_battery_arc, prospector_status_get_battery());
+		lv_obj_set_style_arc_color(left_battery_arc, battery_color(left_bat), LV_PART_INDICATOR);
+        lv_obj_set_style_arc_color(right_battery_arc, battery_color(right_bat), LV_PART_INDICATOR);
 	} else {
 	    lv_arc_set_value(left_battery_arc, 0);
 	    lv_arc_set_value(right_battery_arc, 0);
+		lv_obj_set_style_arc_color(left_battery_arc, lv_color_hex(0x333333), LV_PART_INDICATOR);
+        lv_obj_set_style_arc_color(right_battery_arc, lv_color_hex(0x333333), LV_PART_INDICATOR);
 	}
 
 	for (int i = 0; i < 10; i++) {
