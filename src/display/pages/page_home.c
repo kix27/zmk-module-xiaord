@@ -82,7 +82,7 @@ static void update_home_labels(void) {
 	static char right_battery_buf[16];	
 
     if (prospector_status_has_data()) {
-        snprintf(status_buf, sizeof(status_buf), "%s  %d%%",prospector_status_get_keyboard_name(),prospector_status_get_battery());
+        snprintf(status_buf, sizeof(status_buf), "DEVICE: %s",prospector_status_get_keyboard_name());
         snprintf(layer_buf, sizeof(layer_buf), "LAYER: %s",prospector_status_get_layer_name());
 		snprintf(left_battery_buf, sizeof(left_battery_buf), "L: %d%%",prospector_status_get_peripheral_battery(0));
 		snprintf(right_battery_buf, sizeof(right_battery_buf), "R: %d%%",prospector_status_get_battery());
