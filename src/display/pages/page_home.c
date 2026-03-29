@@ -240,12 +240,12 @@ void page_home_create(lv_obj_t *tile) {
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -60, 65);
+	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -40, 65);
 	
 	right_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(right_battery_label, "R: ---");
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 60, 65);
+	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 40, 65);
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
