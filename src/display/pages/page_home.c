@@ -33,6 +33,8 @@ static lv_obj_t *layer_label;
 static bool scanner_started = false;
 static lv_obj_t *left_battery_label;
 static lv_obj_t *right_battery_label;
+static lv_obj_t *left_battery_arc;
+static lv_obj_t *right_battery_arc;
 /* ── Endpoint status callback ──────────────────────────────────────────── */
 
 static void home_endpoint_cb(struct endpoint_state state)
@@ -95,6 +97,13 @@ static void update_home_labels(void) {
     lv_label_set_text(layer_label, layer_buf);
 	lv_label_set_text(left_battery_label, left_battery_buf);
     lv_label_set_text(right_battery_label, right_battery_buf);
+	if (prospector_status_has_data()) {
+	    lv_arc_set_value(left_battery_arc, prospector_status_get_peripheral_battery(0));
+	    lv_arc_set_value(right_battery_arc, prospector_status_get_battery());
+	} else {
+	    lv_arc_set_value(left_battery_arc, 0);
+	    lv_arc_set_value(right_battery_arc, 0);
+	}
 }
 static void home_timer_cb(lv_timer_t *timer) {
     ARG_UNUSED(timer);
@@ -198,15 +207,45 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
     lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 20);
 
+	left_battery_arc = lv_arc_create(home_screen);
+	lv_obj_set_size(left_battery_arc, 56, 56);
+	lv_arc_set_range(left_battery_arc, 0, 100);
+	lv_arc_set_value(left_battery_arc, 0);
+	lv_arc_set_rotation(left_battery_arc, 270);
+	lv_arc_set_bg_angles(left_battery_arc, 0, 360);
+	lv_obj_remove_style(left_battery_arc, NULL, LV_PART_KNOB);
+	lv_obj_clear_flag(left_battery_arc, LV_OBJ_FLAG_CLICKABLE);
+	lv_obj_set_style_arc_color(left_battery_arc, lv_color_hex(0x333333), LV_PART_MAIN);
+	lv_obj_set_style_arc_width(left_battery_arc, 4, LV_PART_MAIN);
+	lv_obj_set_style_arc_color(left_battery_arc, lv_color_white(), LV_PART_INDICATOR);
+	lv_obj_set_style_arc_width(left_battery_arc, 4, LV_PART_INDICATOR);
+	lv_obj_set_style_bg_opa(left_battery_arc, LV_OPA_TRANSP, 0);
+	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -70, 65);
+	
+	right_battery_arc = lv_arc_create(home_screen);
+	lv_obj_set_size(right_battery_arc, 56, 56);
+	lv_arc_set_range(right_battery_arc, 0, 100);
+	lv_arc_set_value(right_battery_arc, 0);
+	lv_arc_set_rotation(right_battery_arc, 270);
+	lv_arc_set_bg_angles(right_battery_arc, 0, 360);
+	lv_obj_remove_style(right_battery_arc, NULL, LV_PART_KNOB);
+	lv_obj_clear_flag(right_battery_arc, LV_OBJ_FLAG_CLICKABLE);
+	lv_obj_set_style_arc_color(right_battery_arc, lv_color_hex(0x333333), LV_PART_MAIN);
+	lv_obj_set_style_arc_width(right_battery_arc, 4, LV_PART_MAIN);
+	lv_obj_set_style_arc_color(right_battery_arc, lv_color_white(), LV_PART_INDICATOR);
+	lv_obj_set_style_arc_width(right_battery_arc, 4, LV_PART_INDICATOR);
+	lv_obj_set_style_bg_opa(right_battery_arc, LV_OPA_TRANSP, 0);
+	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 70, 65);
+	
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -60, 50);
+	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -70, 65);
 	
 	right_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(right_battery_label, "R: ---");
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 60, 50);
+	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 70, 65);
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
