@@ -997,7 +997,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMAGE_WAVE_BG
 
 const lv_img_dsc_t img_bg = {
     .header = {
-        .cf = LV_IMG_CF_TRUE_COLOR,
+        .cf = LV_COLOR_FORMAT_RGB565,
         .w = 240,
         .h = 240,
     },
