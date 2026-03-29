@@ -17,7 +17,7 @@
 #include "prospector_status.h"
 #include <stdio.h>
 #include <zmk/status_scanner.h>
-LV_IMAGE_DECLARE(wave_bg);
+LV_IMAGE_DECLARE(img_bg);
 
 /* ── RTC device ────────────────────────────────────────────────────────── */
 
@@ -208,7 +208,7 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_bg_opa(home_screen, LV_OPA_COVER, LV_PART_MAIN);
 
     bg_img = lv_image_create(home_screen);
-    lv_image_set_src(bg_img, &wave_bg);
+    lv_image_set_src(bg_img, &img_bg));
     lv_obj_center(bg_img);
     lv_obj_set_style_image_opa(bg_img, LV_OPA_70, 0);
 
