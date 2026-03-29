@@ -93,6 +93,8 @@ static void update_home_labels(void) {
 
     lv_label_set_text(status_label, status_buf);
     lv_label_set_text(layer_label, layer_buf);
+	lv_label_set_text(left_battery_label, left_battery_buf);
+    lv_label_set_text(right_battery_label, right_battery_buf);
 }
 static void home_timer_cb(lv_timer_t *timer) {
     ARG_UNUSED(timer);
