@@ -215,13 +215,13 @@ void page_home_create(lv_obj_t *tile) {
 	    layer_num_labels[i] = lv_label_create(home_screen);
 	    lv_label_set_text(layer_num_labels[i], buf);
 	    lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
-	    lv_obj_align(layer_num_labels[i], LV_ALIGN_TOP_MID, -90 + (i * 20), -10);
+	    lv_obj_align(layer_num_labels[i], LV_ALIGN_TOP_MID, -90 + (i * 20), 20);
 	}
     layer_label = lv_label_create(home_screen);
     lv_label_set_text(layer_label, "LAYER: ---");
     lv_obj_set_style_text_color(layer_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
-    lv_obj_align(layer_label, LV_ALIGN_CENTER, -20, 66);
+    lv_obj_align(layer_label, LV_ALIGN_CENTER, -20, 40);
 
 	left_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(left_battery_arc, 56, 56);
@@ -236,7 +236,7 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(left_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(left_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(left_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -40, 108);
+	lv_obj_align(left_battery_arc, LV_ALIGN_CENTER, -40, 70);
 	
 	right_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(right_battery_arc, 56, 56);
@@ -251,17 +251,17 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_arc_color(right_battery_arc, lv_color_white(), LV_PART_INDICATOR);
 	lv_obj_set_style_arc_width(right_battery_arc, 4, LV_PART_INDICATOR);
 	lv_obj_set_style_bg_opa(right_battery_arc, LV_OPA_TRANSP, 0);
-	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 108);
+	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 70);
 
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -40, 108);
+	lv_obj_align(left_battery_label, LV_ALIGN_CENTER, -40, 70);
 	
 	right_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(right_battery_label, "R: ---");
 	lv_obj_set_style_text_color(right_battery_label, lv_color_white(), LV_PART_MAIN);
-	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 40, 108);
+	lv_obj_align(right_battery_label, LV_ALIGN_CENTER, 40, 70);
 	
     update_home_labels();
     lv_timer_create(home_timer_cb, 500, NULL);
