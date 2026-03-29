@@ -208,20 +208,20 @@ void page_home_create(lv_obj_t *tile) {
     lv_label_set_text(status_label, "WAITING FOR MONA2");
     lv_obj_set_style_text_color(status_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(status_label, &lv_font_montserrat_16, LV_PART_MAIN);
-    lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 8);
+    lv_obj_align(status_label, LV_ALIGN_CENTER, 0, -30);
 	for (int i = 0; i < 10; i++) {
     	char buf[4];
     	snprintf(buf, sizeof(buf), "%d", i);
 	    layer_num_labels[i] = lv_label_create(home_screen);
 	    lv_label_set_text(layer_num_labels[i], buf);
 	    lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
-	    lv_obj_align(layer_num_labels[i], LV_ALIGN_CENTER, -67 + (i * 15), 32);
+	    lv_obj_align(layer_num_labels[i], LV_ALIGN_CENTER, -67 + (i * 15), -10);
 	}
     layer_label = lv_label_create(home_screen);
     lv_label_set_text(layer_label, "LAYER: ---");
     lv_obj_set_style_text_color(layer_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(layer_label, &lv_font_montserrat_16, LV_PART_MAIN);
-    lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 56);
+    lv_obj_align(layer_label, LV_ALIGN_CENTER, 0, 10);
 
 	left_battery_arc = lv_arc_create(home_screen);
 	lv_obj_set_size(left_battery_arc, 56, 56);
