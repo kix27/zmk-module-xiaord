@@ -209,11 +209,13 @@ void page_home_create(lv_obj_t *tile) {
     lv_obj_set_style_text_color(status_label, lv_color_white(), LV_PART_MAIN);
     lv_obj_set_style_text_font(status_label, &lv_font_montserrat_16, LV_PART_MAIN);
     lv_obj_align(status_label, LV_ALIGN_CENTER, 0, 10);
-
-    layer_num_labels[i] = lv_label_create(home_screen);
-    lv_label_set_text(layer_num_labels[i], buf);
-    lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
-    lv_obj_align(layer_num_labels[i], LV_ALIGN_TOP_MID, -90 + (i * 20), 38);
+	for (int i = 0; i < 10; i++) {
+    	char buf[4];
+    	snprintf(buf, sizeof(buf), "%d", i);
+	    layer_num_labels[i] = lv_label_create(home_screen);
+	    lv_label_set_text(layer_num_labels[i], buf);
+	    lv_obj_set_style_text_color(layer_num_labels[i], lv_color_hex(0x666666), LV_PART_MAIN);
+	    lv_obj_align(layer_num_labels[i], LV_ALIGN_TOP_MID, -90 + (i * 20), 38);
 	}
     layer_label = lv_label_create(home_screen);
     lv_label_set_text(layer_label, "LAYER: ---");
@@ -251,10 +253,6 @@ void page_home_create(lv_obj_t *tile) {
 	lv_obj_set_style_bg_opa(right_battery_arc, LV_OPA_TRANSP, 0);
 	lv_obj_align(right_battery_arc, LV_ALIGN_CENTER, 40, 108);
 
-	for (int i = 0; i < 10; i++) {
-    char buf[4];
-    snprintf(buf, sizeof(buf), "%d", i);
-	
 	left_battery_label = lv_label_create(home_screen);
 	lv_label_set_text(left_battery_label, "L: ---");
 	lv_obj_set_style_text_color(left_battery_label, lv_color_white(), LV_PART_MAIN);
